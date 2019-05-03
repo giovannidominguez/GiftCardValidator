@@ -1,0 +1,81 @@
+<!--- Giovanni Dominguez -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+	<title>Gift Card Validator</title>
+<script>
+function validateForm() {
+    var x = document.forms["myForm"]["fname"].value;
+
+    if (x == "") {
+        alert("A number must be entered");
+        return false;
+    }
+
+
+    var x2 = x.replace(/-/g, '');
+    
+
+    var i = x2.length;
+    var isSame = false;
+    while(i--){
+    	if(x2.indexOf(x2[0]) != x2.indexOf(x2[i])){
+    		isSame = false;
+    		break;
+    	}
+    	else
+    		isSame = true;
+
+    }
+
+    var x3 = x2.split('');            
+
+var myLength = x3.length;
+
+    var sum = 0;                              
+    for (var j = 0; j < myLength; j++) {  
+      sum += parseInt(x3[j],10);        
+    }
+
+    if (myLength != 16){
+    	alert("Invalid Gift Card Number: There must only be 16 numbers");
+    	return false;
+    }
+ 	
+ 	if (x2.match(/[a-z]/i)) {
+    alert("Invalid Gift Card Number: Contains letters");
+    return false;
+	}
+
+    if (sum < 16){
+    alert("Invalid Gift Card Number: Sum less than 16");
+    return false;
+    }
+
+    if(isSame == true){
+    	alert("Invalid Gift Card Number: Only one type of number");
+    	return false;
+    }
+
+  	if (x2[myLength-1]%2 == 1){
+	alert("Invalid Gift Card Number: Last number can't be even");
+	return false;
+	}
+
+    else
+    alert("You entered a valid gift card number!\n " + x2);
+}
+</script>
+</head>
+
+
+<body>
+    <h1> Gift Card Validator</h1>
+<form name="myForm" 
+onsubmit="return validateForm()" method="post">
+Validate Gift Card: <input type="text" Name="fname">
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>
